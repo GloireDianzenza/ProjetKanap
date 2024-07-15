@@ -28,17 +28,36 @@ fetch(link+"/"+id).then(response=>response.json()).then(data=>{
 });
 
 addToCart.addEventListener("click",()=>{
-    let newID="",newQuantity=0,newColor="";
-    let newItem = {newID,newQuantity,newColor};
+    let newID=id,newQuantity=quantity.value,newColor=document.getElementById("colors").value;
+    let newItem = {id:newID,quantity:parseInt(newQuantity),color:newColor};
     if(localStorage.getItem("array") === null)
     {
         localStorage.setItem("array",JSON.stringify([]));
         let currentArray = JSON.parse(localStorage.getItem("array"));
-        console.log(currentArray);
+        currentArray.push(newItem);
+        localStorage.setItem("array",JSON.stringify(currentArray));
     }
     else{
-        
+        if(contains(id,parseInt(newQuantity),newColor)){
+            let currentArray = JSON.parse(localStorage.getItem("array"));
+            let index = find(id,parseInt(newQuantity),newColor);
+            let item = currentArray[index];
+            let lastQuantity = item.quantity;
+            newQuantity = parseInt(newQuantity);
+            item.quantity = parseInt(item.quantity) + newQuantity;
+            currentArray[index] = item;
+            localStorage.setItem("array",JSON.stringify(currentArray));
+        }
+        else{
+            let currentArray = JSON.parse(localStorage.getItem("array"));
+            currentArray.push(newItem);
+            localStorage.setItem("array",JSON.stringify(currentArray));
+        }
     }
+
+    console.log(localStorage.getItem("array"));
+
+    window.location = "./cart.html";
 });
 
 /**
@@ -51,9 +70,23 @@ addToCart.addEventListener("click",()=>{
 function contains(id,quantity,color){
     if(localStorage.getItem("array") === null)return false;
     for(let item of JSON.parse(localStorage.getItem("array"))){
-        if(item == {id,quantity,color}){
+        if(item.id === id && item.color === color){
             return true;
         }
     }
     return false;
+}
+
+/**
+ * 
+ * @param {string} id 
+ * @param {number} quantity 
+ * @param {string} color 
+ * @returns {number|null}
+ */
+function find(id,quantity,color){
+    if(!contains(id,quantity,color))return null;
+    let currentArray = JSON.parse(localStorage.getItem("array"));
+    let item = currentArray.filter((test)=>test.id === id && test.color === color)[0];
+    return currentArray.indexOf(item);
 }
