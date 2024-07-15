@@ -14,7 +14,17 @@ fetch(link+"/"+id).then(response=>response.json()).then(data=>{
    title.innerText = product.name;
    price.innerText = product.price;
    description.innerText = product.description;
+
+   for(let color of product.colors){
+        let optDiv = document.createElement("option");
+        optDiv.value = color;
+        optDiv.innerText = color;
+        colors.appendChild(optDiv);
+   }
+
    document.querySelector(".item__img").appendChild(productImg);
 }).catch(error=>{
     console.error("error",error);
 });
+
+console.log(addToCart);
