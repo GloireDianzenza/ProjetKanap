@@ -27,4 +27,32 @@ fetch(link+"/"+id).then(response=>response.json()).then(data=>{
     console.error("error",error);
 });
 
-console.log(addToCart);
+addToCart.addEventListener("click",()=>{
+    let newID="",newQuantity=0,newColor="";
+    let newItem = {newID,newQuantity,newColor};
+    if(localStorage.getItem("array") === null)
+    {
+        localStorage.setItem("array",JSON.stringify([]));
+    }
+    else{
+        
+    }
+    console.log(contains(newID,newQuantity,newColor));
+});
+
+/**
+ * 
+ * @param {string} id 
+ * @param {number} quantity 
+ * @param {string} color 
+ * @returns {boolean}
+ */
+function contains(id,quantity,color){
+    if(localStorage.getItem("array") === null)return false;
+    for(let item of JSON.parse(localStorage.getItem("array"))){
+        if(item == {id,quantity,color}){
+            return true;
+        }
+    }
+    return false;
+}
