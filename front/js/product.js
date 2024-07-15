@@ -33,11 +33,12 @@ addToCart.addEventListener("click",()=>{
     if(localStorage.getItem("array") === null)
     {
         localStorage.setItem("array",JSON.stringify([]));
+        let currentArray = JSON.parse(localStorage.getItem("array"));
+        console.log(currentArray);
     }
     else{
         
     }
-    console.log(contains(newID,newQuantity,newColor));
 });
 
 /**
