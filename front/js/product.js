@@ -55,8 +55,6 @@ addToCart.addEventListener("click",()=>{
         }
     }
 
-    console.log(localStorage.getItem("array"));
-
     window.location = "./cart.html";
 });
 
