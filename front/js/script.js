@@ -3,7 +3,6 @@ const link = "http://localhost:3000/api/products";
 fetch(link).then(response=>response.json()).then(data=>{
     let couches = data;
     for(let couch of couches){
-        console.log(couch);
         let itemDiv = document.createElement("a");
         itemDiv.href = "./product.html?id="+couch._id;
         let articleDiv = document.createElement("article");
