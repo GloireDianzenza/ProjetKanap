@@ -4,7 +4,7 @@ fetch(link).then(response=>response.json()).then(data=>{
     let couches = data;
     for(let couch of couches){
         let itemDiv = document.createElement("a");
-        itemDiv.href = "../front/html/product.html?id="+couch._id;
+        itemDiv.href = "./front/html/product.html?id="+couch._id;
         let articleDiv = document.createElement("article");
 
         let imgDiv = document.createElement("img");
